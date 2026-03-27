@@ -4,6 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
 
 import '../../../domain/entities/recording.dart';
+import '../../../domain/entities/transcription.dart';
 
 /// Database helper for local storage
 class DatabaseHelper {
