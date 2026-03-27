@@ -38,7 +38,7 @@ jobs:
       - run: flutter doctor -v
       
       - run: |
-          flutter build apk --debug 2>&1 | tee build.log
+          flutter build apk --debug --target-platform=android-arm64 2>&1 | tee build.log
           echo "=== Build outputs ==="
           find build -name "*.apk" 2>/dev/null || echo "No APKs found"
           ls -la build/app/outputs/flutter-apk/ 2>/dev/null || true
