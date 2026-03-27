@@ -33,6 +33,8 @@ jobs:
       
       - run: flutter pub get
       
+      - run: flutter doctor
+      
       - run: flutter build apk --debug
       
       - name: Upload debug APK
