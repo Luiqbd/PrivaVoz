@@ -4,7 +4,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' as p;
 
 import '../../../domain/entities/recording.dart';
-import '../../../domain/entities/transcription.dart';
 
 /// Database helper for local storage
 class DatabaseHelper {
@@ -203,29 +202,32 @@ class DatabaseHelper {
   /// Insert transcription
   Future<void> insertTranscription(Transcription transcription) async {
     final db = await database;
+    
+    // Convert words to JSON
+    final wordsList = transcription.words.map((w) => {
+      'word': w.word,
+      'start_time': w.startTime,
+      'end_time': w.endTime,
+      'speaker_id': w.speakerId,
+    }).toList();
+    
+    // Convert speaker segments to JSON
+    final segmentsList = transcription.speakerSegments.map((s) => {
+      'speaker_id': s.speakerId,
+      'speaker_label': s.speakerLabel,
+      'start_time': s.startTime,
+      'end_time': s.endTime,
+      'text': s.text,
+    }).toList();
+    
     await db.insert(
       tableTranscriptions,
       {
         'id': transcription.id,
         'recording_id': transcription.recordingId,
         'text': transcription.text,
-        'words': jsonEncode(transcription.words.map((w) => {
-          return {
-            'word': w.word,
-            'start_time': w.startTime,
-            'end_time': w.endTime,
-            'speaker_id': w.speakerId,
-          };
-        }).toList()),
-        'speaker_segments': jsonEncode(transcription.speakerSegments.map((s) => {
-          return {
-            'speaker_id': s.speakerId,
-            'speaker_label': s.speakerLabel,
-            'start_time': s.startTime,
-            'end_time': s.endTime,
-            'text': s.text,
-          };
-        }).toList()),
+        'words': jsonEncode(wordsList),
+        'speaker_segments': jsonEncode(segmentsList),
         'created_at': transcription.createdAt.toIso8601String(),
         'confidence': transcription.confidence,
       },
