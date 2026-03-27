@@ -25,7 +25,7 @@ dependencies:
   flutter_secure_storage: ^9.0.0
 
 dependency_overrides:
-  record_linux: 0.7.0
+  record_linux: 0.7.2
 
 dev_dependencies:
   flutter_test:
