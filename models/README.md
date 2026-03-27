@@ -1,36 +1,44 @@
 # PrivaVoz AI Models
 
-## Download Required AI Models
+## ⚠️ Important - Models Not in Git
 
-Since model files are too large for Git, download them separately:
+Due to GitHub's 100MB file size limit, AI models cannot be stored in the repository.
+**You must download them separately.**
 
-### Option 1: Direct Download
+## Quick Download
 
+### Option 1: Python Script
 ```bash
-# Create models directory
-mkdir -p models
-
-# Download Whisper Tiny (75MB)
-curl -L -o models/whisper-tiny.bin "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin"
-
-# Download TinyLlama 1.1B Q4 (637MB)
-curl -L -o models/tinyllama-1.1b-q4.gguf "https://huggingface.co/hieupt/TinyLlama-1.1B-Chat-v1.0-Q4_K_M-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0-q4_k_m.gguf"
+cd scripts
+python3 download_models.py
 ```
 
-### Option 2: Manual Download
+### Option 2: Shell Script
+```bash
+bash scripts/download_models.sh
+```
 
-1. **Whisper Tiny**: https://huggingface.co/ggerganov/whisper.cpp/blob/main/ggml-tiny.bin
-2. **TinyLlama**: https://huggingface.co/hieupt/TinyLlama-1.1B-Chat-v1.0-Q4_K_M-GGUF
+### Option 3: Manual Download
 
-### Total Size: ~712MB
+1. **Whisper Tiny** (75MB):
+   ```bash
+   curl -L -o models/whisper-tiny.bin "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin"
+   ```
 
-- whisper-tiny.bin: ~75MB
-- tinyllama-1.1b-q4.gguf: ~637MB
+2. **TinyLlama 1.1B Q4** (637MB):
+   ```bash
+   curl -L -o models/tinyllama-1.1b-q4.gguf "https://huggingface.co/hieupt/TinyLlama-1.1B-Chat-v1.0-Q4_K_M-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0-q4_k_m.gguf"
+   ```
 
-### Integration
+## Models Summary
 
-The app automatically loads models from the `models/` directory at startup. Models are copied to app storage on first run.
+| Model | File | Size | Purpose |
+|-------|------|------|---------|
+| Whisper Tiny | `whisper-tiny.bin` | 75MB | Transcription + Karaoke |
+| TinyLlama 1.1B | `tinyllama-1.1b-q4.gguf` | 637MB | Summaries |
+| **Total** | | **712MB** | |
 
-### Build Note
+## First Run
 
-If building with `flutter build apk`, the models directory should contain placeholder files or be empty. The actual models will be loaded at runtime from app storage.
+On first app launch, models are automatically copied from `assets/models/` to app storage.
+Make sure the models folder contains the model files before building!

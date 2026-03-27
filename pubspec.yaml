@@ -62,4 +62,7 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
-    - models/
+    - models/  # Include model placeholders for build
+    
+  # Enable shader warmup for performance
+  shader: enable

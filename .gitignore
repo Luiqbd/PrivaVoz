@@ -1,10 +1,4 @@
-# PrivaVoz - Ignore large model files
-
-# AI Models - Too large for Git
-# Download separately - see models/README.md
-models/*.bin
-models/*.gguf
-models/*.gguf.index
+# PrivaVoz - Secure Voice Recorder with AI
 
 # Build outputs
 build/
