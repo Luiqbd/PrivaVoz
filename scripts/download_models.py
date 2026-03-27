@@ -16,12 +16,12 @@ from pathlib import Path
 MODELS = [
     {
         "name": "whisper-tiny.bin",
-        "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin",
+        "url": "https://github.com/Luiqbd/PrivaVoz/releases/download/v1.0.0-models/whisper-tiny.bin",
         "size_mb": 75,
     },
     {
         "name": "tinyllama-1.1b-q4.gguf",
-        "url": "https://huggingface.co/hieupt/TinyLlama-1.1B-Chat-v1.0-Q4_K_M-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0-q4_k_m.gguf",
+        "url": "https://github.com/Luiqbd/PrivaVoz/releases/download/v1.0.0-models/tinyllama-1.1b-q4.gguf",
         "size_mb": 637,
     },
 ]

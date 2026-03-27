@@ -14,12 +14,12 @@ mkdir -p "$MODELS_DIR"
 # Whisper Tiny (75MB)
 echo "[1/2] Downloading Whisper Tiny..."
 curl -L -o "$MODELS_DIR/whisper-tiny.bin" \
-  "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin"
+  "https://github.com/Luiqbd/PrivaVoz/releases/download/v1.0.0-models/whisper-tiny.bin"
 
 # TinyLlama 1.1B Q4 (637MB)
 echo "[2/2] Downloading TinyLlama 1.1B Q4..."
 curl -L -o "$MODELS_DIR/tinyllama-1.1b-q4.gguf" \
-  "https://huggingface.co/hieupt/TinyLlama-1.1B-Chat-v1.0-Q4_K_M-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0-q4_k_m.gguf"
+  "https://github.com/Luiqbd/PrivaVoz/releases/download/v1.0.0-models/tinyllama-1.1b-q4.gguf"
 
 echo ""
 echo "✅ Models downloaded successfully!"

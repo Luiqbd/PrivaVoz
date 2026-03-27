@@ -1,34 +1,33 @@
 # PrivaVoz AI Models
 
-## ⚠️ Important - Models Not in Git
+## ⬇️ Download AI Models (Required)
 
-Due to GitHub's 100MB file size limit, AI models cannot be stored in the repository.
-**You must download them separately.**
+Download the AI models from GitHub Releases:
 
-## Quick Download
+### Option 1: Direct Download
+```bash
+# Whisper Tiny (75MB)
+curl -L -o models/whisper-tiny.bin "https://github.com/Luiqbd/PrivaVoz/releases/download/v1.0.0-models/whisper-tiny.bin"
 
-### Option 1: Python Script
+# TinyLlama 1.1B Q4 (637MB)
+curl -L -o models/tinyllama-1.1b-q4.gguf "https://github.com/Luiqbd/PrivaVoz/releases/download/v1.0.0-models/tinyllama-1.1b-q4.gguf"
+```
+
+### Option 2: Python Script
 ```bash
 cd scripts
 python3 download_models.py
 ```
 
-### Option 2: Shell Script
+### Option 3: Shell Script
 ```bash
 bash scripts/download_models.sh
 ```
 
-### Option 3: Manual Download
-
-1. **Whisper Tiny** (75MB):
-   ```bash
-   curl -L -o models/whisper-tiny.bin "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin"
-   ```
-
-2. **TinyLlama 1.1B Q4** (637MB):
-   ```bash
-   curl -L -o models/tinyllama-1.1b-q4.gguf "https://huggingface.co/hieupt/TinyLlama-1.1B-Chat-v1.0-Q4_K_M-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0-q4_k_m.gguf"
-   ```
+### Option 4: Manual Download
+1. Go to: https://github.com/Luiqbd/PrivaVoz/releases/tag/v1.0.0-models
+2. Download both files
+3. Place in `models/` folder
 
 ## Models Summary
 
