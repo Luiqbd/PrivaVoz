@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'package:path_provider/path_provider.dart';
 import 'package:record/record.dart';
 import 'package:uuid/uuid.dart';
@@ -140,7 +141,7 @@ class RecordingService {
   /// Get current recording amplitude (for waveform visualization)
   static Stream<Amplitude> get amplitudeStream => _recorder.onAmplitudeChanged(
     const Duration(milliseconds: 100),
-  );
+  ).map((amp) => Amplitude(current: amp.current, max: amp.max));
   
   /// Check if currently recording
   static bool get isRecording => _isRecording;
@@ -213,5 +214,5 @@ class Amplitude {
   }
   
   /// Get decibels
-  double get dB => max > 0 ? 20 * (current / max).log10() : -160;
+  double get dB => max > 0 ? 20 * log(current / max) / ln10 : -160;
 }
