@@ -62,7 +62,7 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
-    - models/  # Include model placeholders for build
+    # ⚠️ AI Models: See models/README.md - Download before build!
     
   # Enable shader warmup for performance
   shader: enable
