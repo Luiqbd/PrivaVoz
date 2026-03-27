@@ -6,7 +6,6 @@ import 'package:record/record.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../../domain/entities/recording.dart';
-import 'encryption_service.dart';
 
 /// Recording Service - Handles audio recording with auto-save
 class RecordingService {
@@ -101,17 +100,14 @@ class RecordingService {
         ? DateTime.now().difference(_recordingStartTime!)
         : Duration.zero;
     
-    // Encrypt the recording
-    await EncryptionService.encryptFile(_currentRecordingPath!);
-    
-    // Create recording entity
+    // Create recording entity (without encryption for now)
     final recording = Recording(
       id: _uuid.v4(),
       name: name ?? 'Gravação ${DateTime.now().toString().substring(0, 16)}',
       filePath: _currentRecordingPath!,
       duration: duration,
       createdAt: _recordingStartTime ?? DateTime.now(),
-      isEncrypted: true,
+      isEncrypted: false,
       isInVault: false,
     );
     

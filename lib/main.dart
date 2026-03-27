@@ -32,9 +32,7 @@ void main() async {
   // Initialize services
   await ServiceLocator.init();
   
-  // Enable haptic feedback
-  HapticFeedback.init();
-  
+  // Run app
   runApp(
     MultiBlocProvider(
       providers: [
