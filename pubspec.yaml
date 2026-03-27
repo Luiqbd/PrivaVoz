@@ -62,7 +62,7 @@ flutter:
     - assets/
     - assets/icons/
     - assets/images/
-    # ⚠️ AI Models: See models/README.md - Download before build!
+    - assets/models/
     
   # Enable shader warmup for performance
   shader: enable

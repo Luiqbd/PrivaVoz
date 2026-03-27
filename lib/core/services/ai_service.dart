@@ -80,13 +80,14 @@ class AIService {
     }
     
     try {
-      final data = await rootBundle.load('models/$modelName');
+      // Load from assets/models/ (bundled in APK)
+      final data = await rootBundle.load('assets/models/$modelName');
       final bytes = data.buffer.asUint8List();
       await destFile.writeAsBytes(bytes);
-      print('[AI Service] Copied $modelName to app directory');
+      print('[AI Service] ✅ Copied $modelName from assets (offline!)');
     } catch (e) {
-      print('[AI Service] Could not load $modelName from assets: $e');
-      // Continue without the model - will use mock
+      print('[AI Service] Could not load $modelName: $e');
+      // Continue without model - will use mock
     }
   }
   

@@ -16,14 +16,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Download AI Models from Release
+      - name: Download AI Models and copy to assets
         run: |
-          mkdir -p models
+          mkdir -p assets/models
           echo "Downloading Whisper Tiny (75MB)..."
-          curl -L -o models/whisper-tiny.bin "https://github.com/Luiqbd/PrivaVoz/releases/download/v1.0.0-models/whisper-tiny.bin"
+          curl -L -o assets/models/whisper-tiny.bin "https://github.com/Luiqbd/PrivaVoz/releases/download/v1.0.0-models/whisper-tiny.bin"
           echo "Downloading TinyLlama (637MB)..."
-          curl -L -o models/tinyllama-1.1b-q4.gguf "https://github.com/Luiqbd/PrivaVoz/releases/download/v1.0.0-models/tinyllama-1.1b-q4.gguf"
-          ls -lh models/
+          curl -L -o assets/models/tinyllama-1.1b-q4.gguf "https://github.com/Luiqbd/PrivaVoz/releases/download/v1.0.0-models/tinyllama-1.1b-q4.gguf"
+          ls -lh assets/models/
       
       - name: Setup Java
         uses: actions/setup-java@v4
