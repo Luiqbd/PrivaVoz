@@ -35,6 +35,12 @@ jobs:
       
       - run: flutter pub get
       
+      - name: Clean pub cache
+        run: |
+          rm -rf ~/.pub-cache/hosted/pub.dev/record_linux-*
+          flutter pub cache repair
+        shell: bash
+      
       - run: flutter doctor -v
       
       - run: |
