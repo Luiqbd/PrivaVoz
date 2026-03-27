@@ -1,37 +1,24 @@
-cmake_minimum_required(VERSION 3.18.1)
+# PrivaVoz Native Build (CMake/NDK)
 
-project("privavoz")
+## ⚠️ Experimental - Requires NDK
 
-# Set C++ standard
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
+This CMakeLists.txt requires:
+- Android NDK 26.1.10909125
+- whisper.cpp and llama.cpp sources (download separately)
 
-# Find required libraries
-find_library(log-lib log)
-find_library(android-lib android)
+## Simplified Build (No Native libs)
 
-# Add whisper.cpp subdirectory
-add_subdirectory(whisper.cpp ${CMAKE_BINARY_DIR}/whisper.cpp/build)
+For build WITHOUT native FFI (works without NDK):
+```bash
+# Just builds with mock AI - no whisper.so or llama.so
+flutter build apk --release
+```
 
-# Build libwhisper
-add_library(whisper SHARED
-    whisper_bridge.cpp
-)
+## Full Build with Native FFI
 
-target_link_libraries(whisper
-    whisper.cpp
-    ${log-lib}
-)
+The GitHub Actions workflow handles this automatically:
+- Downloads whisper.cpp and llama.cpp
+- Compiles libwhisper.so and libllama.so with NDK
+- Bundles in APK
 
-# Add llama.cpp subdirectory
-add_subdirectory(llama.cpp ${CMAKE_BINARY_DIR}/llama.cpp/build)
-
-# Build libllama  
-add_library(llama SHARED
-    llama_bridge.cpp
-)
-
-target_link_libraries(llama
-    llama.cpp
-    ${log-lib}
-)
+See: `.github/workflows/build.yml`

@@ -72,6 +72,8 @@ class AIService {
   static bool get isNative => _nativeInitialized;
   
   /// Copy model from assets to app directory
+  /// Note: For now, models are not bundled - using mock AI
+  /// Models can be added later as assets
   static Future<void> _copyModelFromAssets(String modelName, String destPath) async {
     final destFile = File('$destPath/$modelName');
     if (await destFile.exists()) {
@@ -79,16 +81,8 @@ class AIService {
       return;
     }
     
-    try {
-      // Load from assets/models/ (bundled in APK)
-      final data = await rootBundle.load('assets/models/$modelName');
-      final bytes = data.buffer.asUint8List();
-      await destFile.writeAsBytes(bytes);
-      print('[AI Service] ✅ Copied $modelName from assets (offline!)');
-    } catch (e) {
-      print('[AI Service] Could not load $modelName: $e');
-      // Continue without model - will use mock
-    }
+    // Models not bundled - app will use mock AI
+    print('[AI Service] Note: Models not bundled (offline mode with mock AI)');
   }
   
   /// Get model information
