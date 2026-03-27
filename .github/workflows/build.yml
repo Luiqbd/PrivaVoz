@@ -1,4 +1,4 @@
-name: Build PrivaVoz APK (Simplified)
+name: Build PrivaVoz APK
 
 on:
   push:
@@ -7,40 +7,27 @@ on:
 
 jobs:
   build:
-    name: Build Android APK
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       
-      - name: Setup Java
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
       
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
-      
-      - name: Install Flutter
-        uses: subosito/flutter-action@v2
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
         with:
           flutter-version: '3.24.5'
-          channel: 'stable'
       
-      - name: Get Flutter dependencies
-        run: |
-          flutter config --no-analytics
-          flutter pub get -v 2>&1 | tail -30
+      - run: flutter pub get
       
-      - name: Build debug APK
-        run: |
-          flutter build apk --debug
+      - run: flutter build apk --debug
       
-      - name: Build release APK
-        run: |
-          flutter build apk --release
+      - run: flutter build apk --release
       
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
@@ -53,14 +40,3 @@ jobs:
         with:
           name: privavoz-release.apk
           path: build/app/outputs/flutter-apk/app-release.apk
-      
-      - name: Create GitHub Release
-        if: github.event_name == 'push'
-        run: |
-          gh release delete v1.0.0-apk --yes 2>/dev/null || true
-          gh release create v1.0.0-apk \
-            --title "PrivaVoz v1.0.0 - APK Completo" \
-            --notes "PrivaVoz App - Gravador de Voz com IA 100% Offline" \
-            build/app/outputs/flutter-apk/app-release.apk
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
