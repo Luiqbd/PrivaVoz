@@ -61,6 +61,21 @@ android {
             shrinkResources true
         }
     }
+    
+    // Native code build
+    externalNativeBuild {
+        cmake {
+            path file("src/main/cpp/CMakeLists.txt")
+            version "3.18.1"
+        }
+    }
+    
+    // Bundled libraries
+    sourceSets {
+        getByName("main") {
+            jniLibs.srcDirs += ["src/main/cpp/libs"]
+        }
+    }
 }
 
 flutter {

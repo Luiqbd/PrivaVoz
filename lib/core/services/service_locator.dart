@@ -1,8 +1,9 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../data/datasources/database_helper.dart';
-import '../services/encryption_service.dart';
-import '../services/subscription_service.dart';
+import '../../data/datasources/database_helper.dart';
+import 'ai_service.dart';
+import 'encryption_service.dart';
+import 'subscription_service.dart';
 
 /// Service Locator - Simple dependency injection
 class ServiceLocator {
@@ -31,10 +32,14 @@ class ServiceLocator {
     // Initialize encryption
     await EncryptionService.init();
 
+    // Initialize AI service (loads models from assets)
+    await AIService.initialize();
+
     // Initialize subscription service (activate trial if first launch)
     await SubscriptionService.activateTrial();
 
     _instance._initialized = true;
+    print('[ServiceLocator] All services initialized');
   }
 
   /// Get a service by type

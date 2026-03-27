@@ -1,0 +1,24 @@
+# PrivaVoz - Ignore large model files
+
+# AI Models - Too large for Git
+# Download separately - see models/README.md
+models/*.bin
+models/*.gguf
+models/*.gguf.index
+
+# Build outputs
+build/
+*.apk
+*.aab
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
