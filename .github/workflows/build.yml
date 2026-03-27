@@ -26,19 +26,24 @@ jobs:
         with:
           flutter-version: '3.27.3'
           channel: 'stable'
-      
+
       - name: Create local.properties
         run: |
           echo "flutter.sdk=${{ env.FLUTTER_ROOT }}" > android/local.properties
+          echo "sdk.dir=$ANDROID_HOME" >> android/local.properties
+          cat android/local.properties
       
       - run: flutter pub get
       
-      - run: flutter doctor
+      - run: flutter doctor -v
       
       - run: |
           flutter build apk --debug 2>&1 | tee build.log
-          ls -la build/app/outputs/flutter-apk/ || true
-          ls -la build/app/outputs/ || true
+          echo "=== Build outputs ==="
+          find build -name "*.apk" 2>/dev/null || echo "No APKs found"
+          ls -la build/app/outputs/flutter-apk/ 2>/dev/null || true
+          ls -la build/app/outputs/apk/ 2>/dev/null || true
+          ls -la build/ 2>/dev/null || true
       
       - name: Upload debug APK
         uses: actions/upload-artifact@v4
